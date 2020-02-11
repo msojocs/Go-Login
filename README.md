@@ -1,6 +1,10 @@
 # GoLogin
  适用于   Wordpress  的第三方登录插件
 
+
+# TODO
+1. 增加是否启用微信登录控制（目前只有选项，实际功能未实现）
+
 # 更新
 1.0.0 Alpha2
 
@@ -19,20 +23,36 @@
  | 新浪   | domain/Gologin/callback/sina  |
  | 百度   | domain/Gologin/callback/baidu |
  | Github | domain/Gologin/callback/github|
- | 微信   | 无                            |
-
-# 文件夹说明
-
-1.admin------前端 使用
-
-2.css----------前端 使用
+ | 微信   | 无（采用GoAuth方案，无需配置）           |
 
 # 缺陷
 
-1.后台难看
+1. 有一些隐藏bug
 
 # 预览
+## 前台登录
+![前台登录](/pic/preview/login.png)
+![前台登录](/pic/preview/wp-login.png)
 
- 捐赠支持
- -
+## 后台
+![后台设置](/pic/preview/settings.png)
+
+## 个人资料--头像
+![头像](/pic/preview/avatars.png)
+
+## 个人资料--绑定--未绑定
+![绑定](/pic/preview/login-bind.png)
+![未绑定](/pic/preview/login-unbind.png)
+
+
+# 打赏支持~
 ### 如果你觉得不错，可以请作者喝杯奶茶，谢谢大家支持！
+
+厚颜无耻 ╮(╯▽╰)╭
+
+| 支付宝 | 微信 |
+| ------- | ----- |
+|![支付宝打赏](/pic/pay/AliPay.jpg)|![微信打赏](/pic/pay/WeChat.png)|
+
+----
+结束
