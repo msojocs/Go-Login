@@ -9,9 +9,35 @@ if (!defined('WP_UNINSTALL_PLUGIN')) {
  * Uninstall operations
  */
 function single_uninstall() {
-    // delete table
+    // delete column
     // $GLOBALS['wpdb']->query("DROP TABLE IF EXISTS {$GLOBALS['wpdb']->prefix}table_name");
-
+    global $wpdb;
+    // 删除qq_openid字段(QQ)
+    $var = $wpdb->query("SELECT `qq_openid` FROM $wpdb->users");
+    if ($var) {
+        $wpdb->query("ALTER TABLE $wpdb->users DROP qq_openid");
+    }
+    // 删除sina_uid字段(新浪)
+    $var1 = $wpdb->query("SELECT `sina_uid` FROM $wpdb->users");
+    if ($var1) {
+        $wpdb->query("ALTER TABLE $wpdb->users DROP sina_uid");
+    }
+    // 删除bduid字段(百度)
+    $var2 = $wpdb->query("SELECT `bduid` FROM $wpdb->users");
+    if ($var2) {
+        $wpdb->query("ALTER TABLE $wpdb->users DROP bduid");
+    }
+    // 删除ghid字段(Github)
+    $var3 = $wpdb->query("SELECT ghid FROM $wpdb->users");
+    if ($var3) {
+        $wpdb->query("ALTER TABLE $wpdb->users DROP ghid");
+    }
+    // 删除wx_openid字段(微信)
+    $var4 = $wpdb->query("SELECT wx_openid FROM $wpdb->users");
+    if ($var4) {
+        $wpdb->query("ALTER TABLE $wpdb->users DROP wx_openid");
+    }
+    
     // delete options
     delete_option('Go_login_options_qq_appid');
     delete_option('Go_login_options_qq_appkey');

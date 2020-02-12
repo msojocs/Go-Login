@@ -43,7 +43,8 @@
                 echo "<a class=\"bd\" href=\"javascript:Go_login('bd');\" title=\"百度登录\"></a>";
             if (get_option('Go_login_options_gh_ClientID') && get_option('Go_login_options_gh_ClientSecret'))
                 echo "<a class=\"qqck github\" href=\"" . get_Go_login_url('gh', false) . "\" title=\"Github登录\"></a>";
-            echo "<a class=\"wechat\" href=\"javascript:Go_login('wx');\" title=\"微信登录\"></a>";
+            if(get_option('Go_login_options_wechat_switch') == 'on')
+                echo "<a class=\"wechat\" href=\"javascript:Go_login('wx');\" title=\"微信登录\"></a>";
             ?>
         </div>
         <?php

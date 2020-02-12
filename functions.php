@@ -150,7 +150,8 @@ if (!function_exists('Gologin_custom_login_img')) {
         echo '<a class="sina" href="'.get_Go_login_url('sina', false).'" title="新浪微博登录"></a>';
         echo '<a class="bd" href="'.get_Go_login_url('bd', false).'" title="百度登录"></a>';
         echo '<a class="github" href="'.get_Go_login_url('gh', false).'" title="Github登录"></a>';
-        echo '<a class="wechat" href="'.get_Go_login_url('wx', false).'" title="微信登录"></a></div>';
+        if(get_option('Go_login_options_wechat_switch') == 'on')
+            echo '<a class="wechat" href="'.get_Go_login_url('wx', false).'" title="微信登录"></a></div>';
     }
 }
 add_action('login_form', 'Gologin_custom_login_img');
@@ -528,7 +529,8 @@ function Go_login_connect_form() {
             if (!empty(get_option('Go_login_options_gh_ClientID')) && !empty(get_option('Go_login_options_gh_ClientSecret')))
                 echo'<a class="qqck github" href="' . get_Go_login_url('gh', false) . '" title="Github登录"></a>';
         }
-        echo '<a class="wechat" href="javascript:Go_login(\'wx\');" title="微信登录"></a></div>';
+        if(get_option('Go_login_options_wechat_switch') == 'on')
+            echo '<a class="wechat" href="javascript:Go_login(\'wx\');" title="微信登录"></a></div>';
     }
 }
 

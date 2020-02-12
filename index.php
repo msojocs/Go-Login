@@ -77,6 +77,8 @@ function Go_login_query() {
         
         //微信
         case 'wx':
+            if(get_option('Go_login_options_wechat_switch') != 'on')
+                exit("微信登录已关闭！");
             wx_login();
             exit;
         break;
