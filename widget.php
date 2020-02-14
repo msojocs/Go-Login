@@ -32,22 +32,7 @@
         </div>
         <?php
     } else {
-        ?>
-        <div class="Go_login_widget">
-            <?php
-            if (get_option('Go_login_options_qq_appid') && get_option('Go_login_options_qq_appkey'))
-                echo "<a class=\"qqa\" href=\"javascript:Go_login('qq');\" title=\"QQ登录\"></a>";
-            if (get_option('Go_login_options_sina_appkey') && get_option('Go_login_options_sina_appkey'))
-                echo "<a class=\"sina\" href=\"javascript:Go_login('sina');\" title=\"新浪微博登录\"></a>";
-            if (get_option('Go_login_options_bd_apikey') && get_option('Go_login_options_bd_secretkey'))
-                echo "<a class=\"bd\" href=\"javascript:Go_login('bd');\" title=\"百度登录\"></a>";
-            if (get_option('Go_login_options_gh_ClientID') && get_option('Go_login_options_gh_ClientSecret'))
-                echo "<a class=\"qqck github\" href=\"" . get_Go_login_url('gh', false) . "\" title=\"Github登录\"></a>";
-            if(get_option('Go_login_options_wechat_switch') == 'on')
-                echo "<a class=\"wechat\" href=\"javascript:Go_login('wx');\" title=\"微信登录\"></a>";
-            ?>
-        </div>
-        <?php
+        Go_login_connect_form();
     }
     ?>
 </div>

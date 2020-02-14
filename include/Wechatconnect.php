@@ -138,7 +138,7 @@ function Gologin_goauth_auto_login() {
             $login_name = 'wx_' . wp_create_nonce($openid);
 
             if (!$openid) {
-                exit('<meta charset="utf-8" />ErrorCode:Traum0001<br/>ErrorMessage:openid is empty <a href="/">Click to home</a><br/>Contact QQ:<a target="_blank" href="http://wpa.qq.com/msgrd?v=3&uin=1690127128&site=qq&menu=yes">1690127128</a>');
+                exit('异常');
             }
             $userinfo = array(
                 'avatar' => $wxavatar,

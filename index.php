@@ -29,6 +29,8 @@ function Go_login_query() {
     switch ($type) {
         //QQ
         case 'qq':
+            if (empty(get_option('Go_login_options_qq_appid')) || empty(get_option('Go_login_options_qq_appkey')))
+                exit("非常抱歉，QQ登录已关闭！");
             $qq = new Qqconnect();
             $qq->getAuthCode();
             exit;
@@ -41,6 +43,8 @@ function Go_login_query() {
         
         //SINA
         case 'sina':
+            if (empty(get_option('Go_login_options_sina_appkey')) || empty(get_option('Go_login_options_sina_appkey')))
+                exit("非常抱歉，微博登录已关闭！");
             $sina = new Sinaconnect();
             $sina->getAuthCode();
             exit;
@@ -53,6 +57,8 @@ function Go_login_query() {
         
         //百度
         case 'bd':
+            if (empty(get_option('Go_login_options_bd_apikey')) || empty(get_option('Go_login_options_bd_secretkey')))
+                exit("非常抱歉，百度登录已关闭！");
             $bd = new Bdconnect();
             $bd->getAuthCode();
             exit;
@@ -65,6 +71,8 @@ function Go_login_query() {
             
         //Github
         case 'gh':
+            if (empty(get_option('Go_login_options_gh_ClientID')) || empty(get_option('Go_login_options_gh_ClientSecret')))
+                exit("非常抱歉，Github登录已关闭！");
             $gh = new Ghconnect();
             $gh->getAuthCode();
             exit;
@@ -78,7 +86,7 @@ function Go_login_query() {
         //微信
         case 'wx':
             if(get_option('Go_login_options_wechat_switch') != 'on')
-                exit("微信登录已关闭！");
+                exit("非常抱歉，微信登录已关闭！");
             wx_login();
             exit;
         break;

@@ -146,12 +146,7 @@ add_filter('plugin_action_links_Go_login/index.php', 'add_Go_login_action_links'
 //自定义登录框内容
 if (!function_exists('Gologin_custom_login_img')) {
     function Gologin_custom_login_img() {
-        echo '<div id="Go_login_wp_login_page" class="Go_login_widget"><a class="qqck qqa" href="'.get_Go_login_url('qq', false).'" title="QQ登录"></a>';
-        echo '<a class="sina" href="'.get_Go_login_url('sina', false).'" title="新浪微博登录"></a>';
-        echo '<a class="bd" href="'.get_Go_login_url('bd', false).'" title="百度登录"></a>';
-        echo '<a class="github" href="'.get_Go_login_url('gh', false).'" title="Github登录"></a>';
-        if(get_option('Go_login_options_wechat_switch') == 'on')
-            echo '<a class="wechat" href="'.get_Go_login_url('wx', false).'" title="微信登录"></a></div>';
+        Go_login_connect_form();
     }
 }
 add_action('login_form', 'Gologin_custom_login_img');
@@ -250,92 +245,44 @@ function Go_login_profile() {
             </script>
                 <div class="Go_login_widget">
                     <?php
-                    if (isMobile()) {
+                        echo '<script src="//lib.baomitu.com/jquery/1.8.3/jquery.min.js"></script>';
+                        //解决解绑后在当前页面再绑定时自动解绑的尴尬现象
+                        
                         if (is_gologin_bind('qq')) {
                             $qq_jburl = add_query_arg('Go_login_type', 'qqjb', get_edit_user_link());
                             echo '<a class="qq-b" title="QQ解绑" href="'.$qq_jburl.'"></a>';
                         } else {
-                            ?>
-                            <a class="qqck qqa" href="<?php get_Go_login_url('qq') ?>" title="QQ登录绑定"></a>
-                            <?php
+                            echo '<a class="gologin-button qq" href="' . get_Go_login_url('qq', false) . '" title="QQ登录绑定"></a>';
                         }
-                        if (is_gologin_bind('sina')) {
-                            $sina_jburl = add_query_arg('Go_login_type', 'sinajb', get_edit_user_link());
-                            echo '<a class="sina-b" title="新浪微博解绑" href="'.$sina_jburl.'"></a>';
-                        } else {
-                            ?>
-                            <a class="qqck sina" href="<?php get_Go_login_url('sina') ?>" title="新浪微博登录绑定"></a>
-                            <?php
-                        }
-                        if (is_gologin_bind('bd')) {
-                            $bd_jburl = add_query_arg('Go_login_type','bdjb',get_edit_user_link());
-                            echo '<a class="bd-b" title="百度解绑" href="'.$bd_jburl.'"></a>';
-                        } else {
-                            ?>
-                            <a class="qqck bd" href="<?php get_Go_login_url('bd') ?>" title="百度登录绑定"></a>
-                            <?php
-                        }
-                        if (is_gologin_bind('gh')) {
-                            $gh_jburl = add_query_arg('Go_login_type','ghjb',get_edit_user_link());
-                            echo '<a class="github-b" title="Github解绑" href="'.$gh_jburl.'"></a>';
-                        } else {
-                            ?>
-                            <a class="qqck github" href="<?php get_Go_login_url('gh') ?>" title="Github登录绑定"></a>
-                            <?php
-                        }
-                        if (is_gologin_bind('wx')) {
-                            $wx_jburl = add_query_arg('Go_login_type','wxjb',get_edit_user_link());
-                            echo '<a class="wechat-b" title="微信解绑" href="'.$wx_jburl.'"></a>';
-                        } else {
-                            ?>
-                            <a class="qqck wechat" href="<?php get_Go_login_url('wx') ?>" title="微信登录绑定"></a>
-                            <?php
-                        }
-
-                    } else {
-                        echo '<script src="//lib.baomitu.com/jquery/1.8.3/jquery.min.js"></script>';
-                        //解决解绑后在当前页面再绑定时自动解绑的尴尬现象
-                        if (is_gologin_bind('qq')) {
-                            $qq_jburl = add_query_arg('Go_login_type','qqjb',get_edit_user_link());
-                            echo '<a class="qq-b" title="QQ解绑" href="'.$qq_jburl.'"></a>';
-                        } else {
-                            ?>
-                            <a class="qqa" href="javascript:Go_login('qq');" title="QQ登录绑定"></a>
-                            <?php
-                        }
+                        
                         if (is_gologin_bind('sina')) {
                             $sina_jburl = add_query_arg('Go_login_type','sinajb',get_edit_user_link());
                             echo '<a class="sina-b" title="新浪微博解绑" href="'.$sina_jburl.'"></a>';
                         } else {
-                            ?>
-                            <a class="sina" href="javascript:Go_login('sina');" title="新浪微博登录绑定"></a>
-                            <?php
+                            echo '<a class="gologin-button sina" href="' . get_Go_login_url('sina', false) . '" title="新浪微博登录绑定"></a>';
                         }
+                        
                         if (is_gologin_bind('bd')) {
                             $bd_jburl = add_query_arg('Go_login_type','bdjb',get_edit_user_link());
                             echo '<a class="bd-b" title="百度解绑" href="'.$bd_jburl.'"></a>';
                         } else {
-                            ?>
-                            <a class="bd" href="javascript:Go_login('bd');" title="百度登录绑定"></a>
-                            <?php
+                            echo '<a class="gologin-button bd" href="' . get_Go_login_url('bd', false) . '" title="百度登录绑定"></a>';
                         }
+                        
                         if (is_gologin_bind('gh')) {
                             $gh_jburl = add_query_arg('Go_login_type','ghjb',get_edit_user_link());
                             echo '<a class="github-b"title="Github解绑" href="'.$gh_jburl.'"></a>';
                         } else {
-                            ?>
-                            <a class="qqck github" href="<?php get_Go_login_url('gh') ?>" title="Github登录绑定"></a>
-                            <?php
+                            echo '<a class="gologin-button github" href="' . get_Go_login_url('sina', false) . '" title="Github登录绑定"></a>';
                         }
+                        
                         if (is_gologin_bind('wx')) {
                             $wx_jburl = add_query_arg('Go_login_type','wxjb',get_edit_user_link());
                             echo '<a class="wechat-b" title="微信解绑" href="'.$wx_jburl.'"></a>';
                         } else {
-                            ?>
-                            <a class="qqck wechat" href="<?php get_Go_login_url('wx') ?>" title="微信登录绑定"></a>
-                            <?php
+                            echo '<a class="gologin-button wechat" href="' . get_Go_login_url('sina', false) . '" title="微信登录绑定"></a>';
                         }
-                    }
+                    
                     ?>
                 </div>
             </td>
@@ -350,9 +297,8 @@ add_action('show_user_profile','Go_login_profile');
 * $type 处理类型 qq sina bd gh wx
 */
 function Go_login_handle($openid, $userinfo, $type) {
-    $success_massage = '<body><div class="login_iframe"><div class="spinner"><div class="double-bounce1"></div><div class="double-bounce2"></div></div><h2 class="sa-title">登录成功！</h2>
-    <script> parent.location.reload();</script>
-    <style type="text/css">.login_iframe{padding:20px 0;background-color:#FFF;}.sa-title{text-align:center;font-size:20px;font-weight:400;margin-top:20px;}.spinner{width:60px;height:60px;position:relative;margin:100px auto;}.double-bounce1,.double-bounce2{width:100%;height:100%;border-radius:50%;background-color:#67CF22;opacity:0.6;position:absolute;top:0;left:0;-webkit-animation:bounce 2.0s infinite ease-in-out;animation:bounce 2.0s infinite ease-in-out;}.double-bounce2{-webkit-animation-delay:-1.0s;animation-delay:-1.0s;}@-webkit-keyframes bounce{0%,100%{-webkit-transform:scale(0.0)}50%{-webkit-transform:scale(1.0)}}@keyframes bounce{0%,100%{transform:scale(0.0);-webkit-transform:scale(0.0);}50%{transform:scale(1.0);-webkit-transform:scale(1.0);}}</style></div></body>';
+    $success_massage = '<body><style type="text/css">.login_iframe{padding:20px 0;background-color:#FFF;}.sa-title{text-align:center;font-size:20px;font-weight:400;margin-top:20px;}.spinner{width:60px;height:60px;position:relative;margin:100px auto;}.double-bounce1,.double-bounce2{width:100%;height:100%;border-radius:50%;background-color:#67CF22;opacity:0.6;position:absolute;top:0;left:0;-webkit-animation:bounce 2.0s infinite ease-in-out;animation:bounce 2.0s infinite ease-in-out;}.double-bounce2{-webkit-animation-delay:-1.0s;animation-delay:-1.0s;}@-webkit-keyframes bounce{0%,100%{-webkit-transform:scale(0.0)}50%{-webkit-transform:scale(1.0)}}@keyframes bounce{0%,100%{transform:scale(0.0);-webkit-transform:scale(0.0);}50%{transform:scale(1.0);-webkit-transform:scale(1.0);}}</style><div class="login_iframe"><div class="spinner"><div class="double-bounce1"></div><div class="double-bounce2"></div></div><h2 class="sa-title">登录成功！即将返回登录前页面~</h2>
+    <script>location.href = JSON.parse(localStorage.getItem(\'historyUrl\'));</script></div></body>';
     global $wpdb;
     $is_login = is_user_logged_in();
     $uid = get_current_user_id();
@@ -445,92 +391,25 @@ function Go_login_handle($openid, $userinfo, $type) {
     }
 }
 
-/*移动端判断*/
-function isMobile() {
-    // 如果有HTTP_X_WAP_PROFILE则一定是移动设备
-    if (isset ($_SERVER['HTTP_X_WAP_PROFILE'])) {
-        return true;
-    }
-    // 如果via信息含有wap则一定是移动设备,部分服务商会屏蔽该信息
-    if (isset ($_SERVER['HTTP_VIA'])) {
-        // 找不到为flase,否则为true
-        return stristr($_SERVER['HTTP_VIA'], "wap") ? true : false;
-    }
-    // 脑残法，判断手机发送的客户端标志,兼容性有待提高
-    if (isset ($_SERVER['HTTP_USER_AGENT'])) {
-        $clientkeywords = array ('nokia',
-            'sony',
-            'ericsson',
-            'mot',
-            'samsung',
-            'htc',
-            'sgh',
-            'lg',
-            'sharp',
-            'sie-',
-            'philips',
-            'panasonic',
-            'alcatel',
-            'lenovo',
-            'iphone',
-            'ipod',
-            'blackberry',
-            'meizu',
-            'android',
-            'netfront',
-            'symbian',
-            'ucweb',
-            'windowsce',
-            'palm',
-            'operamini',
-            'operamobi',
-            'openwave',
-            'nexusone',
-            'cldc',
-            'midp',
-            'wap',
-            'mobile'
-        );
-        // 从HTTP_USER_AGENT中查找手机浏览器的关键字
-        if (preg_match("/(" . implode('|', $clientkeywords) . ")/i", strtolower($_SERVER['HTTP_USER_AGENT']))) {
-            return true;
-        }
-    }
-    // 协议法，因为有可能不准确，放到最后判断
-    if (isset ($_SERVER['HTTP_ACCEPT'])) {
-        // 如果只支持wml并且不支持html那一定是移动设备
-        // 如果支持wml和html但是wml在html之前则是移动设备
-        if ((strpos($_SERVER['HTTP_ACCEPT'], 'vnd.wap.wml') !== false) && (strpos($_SERVER['HTTP_ACCEPT'], 'text/html') === false || (strpos($_SERVER['HTTP_ACCEPT'], 'vnd.wap.wml') < strpos($_SERVER['HTTP_ACCEPT'], 'text/html')))) {
-            return true;
-        }
-    }
-    return false;
-}
-
+//登录表单
 function Go_login_connect_form() {
     if (!is_user_logged_in()) {
         echo '<div class="Go_login_widget">';
-        if (isMobile()) {
-            if (!empty(get_option('Go_login_options_qq_appid')) && !empty(get_option('Go_login_options_qq_appkey')))
-                echo '<a class="qqck qqa" style="margin-right:10px;" href="' . get_Go_login_url('qq', false) . '" title="QQ登录"></a>';
-            if (!empty(get_option('Go_login_options_sina_appkey')) && !empty(get_option('Go_login_options_sina_appkey')))
-                echo '<a class="qqck sina" href="' . get_Go_login_url('sina', false) . '" title="新浪微博登录"></a>';
-            if (!empty(get_option('Go_login_options_bd_apikey')) && !empty(get_option('Go_login_options_bd_secretkey')))
-                echo '<a class="qqck bd" href="' . get_Go_login_url('bd', false) . '" title="百度登录"</a>';
-            if (!empty(get_option('Go_login_options_gh_ClientID')) && !empty(get_option('Go_login_options_gh_ClientSecret')))
-                echo '<a class="qqck github" href="' . get_Go_login_url('gh', false) . '" title="Github登录"></a>';
-        } else {
-            if (!empty(get_option('Go_login_options_qq_appid')) && !empty(get_option('Go_login_options_qq_appkey')))
-                echo'<a class="qqa" href="javascript:Go_login(\'qq\');" title="QQ登录"></a>';
-            if (!empty(get_option('Go_login_options_sina_appkey')) && !empty(get_option('Go_login_options_sina_appkey')))
-                echo'<a class="sina" href="javascript:Go_login(\'sina\');" title="新浪微博登录"></a>';
-            if (!empty(get_option('Go_login_options_bd_apikey')) && !empty(get_option('Go_login_options_bd_secretkey')))
-                echo'<a class="bd" href="javascript:Go_login(\'bd\');" title="百度登录"></a>';
-            if (!empty(get_option('Go_login_options_gh_ClientID')) && !empty(get_option('Go_login_options_gh_ClientSecret')))
-                echo'<a class="qqck github" href="' . get_Go_login_url('gh', false) . '" title="Github登录"></a>';
-        }
+        
+        if (!empty(get_option('Go_login_options_qq_appid')) && !empty(get_option('Go_login_options_qq_appkey')))
+            echo'<a class="gologin-button qq" href="' . get_Go_login_url('qq', false) . '" title="QQ登录"></a>';
+            
+        if (!empty(get_option('Go_login_options_sina_appkey')) && !empty(get_option('Go_login_options_sina_appkey')))
+            echo'<a class="gologin-button sina" href="' . get_Go_login_url('sina', false) . '" title="新浪微博登录"></a>';
+            
+        if (!empty(get_option('Go_login_options_bd_apikey')) && !empty(get_option('Go_login_options_bd_secretkey')))
+            echo'<a class="gologin-button bd" href="' . get_Go_login_url('bd', false) . '" title="百度登录"></a>';
+            
+        if (!empty(get_option('Go_login_options_gh_ClientID')) && !empty(get_option('Go_login_options_gh_ClientSecret')))
+            echo'<a class="gologin-button github" href="' . get_Go_login_url('gh', false) . '" title="Github登录"></a>';
+            
         if(get_option('Go_login_options_wechat_switch') == 'on')
-            echo '<a class="wechat" href="javascript:Go_login(\'wx\');" title="微信登录"></a></div>';
+            echo '<a class="gologin-button wechat" href="' . get_Go_login_url('wx', false) . '" title="微信登录"></a></div>';
     }
 }
 
