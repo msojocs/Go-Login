@@ -4,7 +4,7 @@ Plugin Name: GoLogin社会化登录
 Plugin URI: https://www.jysafe.cn
 Description: QQ，新浪微博，百度，Github，微信登录插件
 Author: 祭夜
-Version: 1.0.0 Alpha1
+Version: 1.0.1
 Author URI: https://www.jysafe.cn
 */
 if (!defined('Go_Login_DIR')) {

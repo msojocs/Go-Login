@@ -250,37 +250,37 @@ function Go_login_profile() {
                         
                         if (is_gologin_bind('qq')) {
                             $qq_jburl = add_query_arg('Go_login_type', 'qqjb', get_edit_user_link());
-                            echo '<a class="qq-b" title="QQ解绑" href="'.$qq_jburl.'"></a>';
+                            echo '<a class="Gologin_qq-b" title="QQ解绑" href="'.$qq_jburl.'"></a>';
                         } else {
-                            echo '<a class="gologin-button qq" href="' . get_Go_login_url('qq', false) . '" title="QQ登录绑定"></a>';
+                            echo '<a class="gologin-button Gologin_qq" href="' . get_Go_login_url('qq', false) . '" title="QQ登录绑定"></a>';
                         }
                         
                         if (is_gologin_bind('sina')) {
                             $sina_jburl = add_query_arg('Go_login_type','sinajb',get_edit_user_link());
-                            echo '<a class="sina-b" title="新浪微博解绑" href="'.$sina_jburl.'"></a>';
+                            echo '<a class="Gologin_sina-b" title="新浪微博解绑" href="'.$sina_jburl.'"></a>';
                         } else {
-                            echo '<a class="gologin-button sina" href="' . get_Go_login_url('sina', false) . '" title="新浪微博登录绑定"></a>';
+                            echo '<a class="gologin-button Gologin_sina" href="' . get_Go_login_url('sina', false) . '" title="新浪微博登录绑定"></a>';
                         }
                         
                         if (is_gologin_bind('bd')) {
                             $bd_jburl = add_query_arg('Go_login_type','bdjb',get_edit_user_link());
-                            echo '<a class="bd-b" title="百度解绑" href="'.$bd_jburl.'"></a>';
+                            echo '<a class="Gologin_bd-b" title="百度解绑" href="'.$bd_jburl.'"></a>';
                         } else {
-                            echo '<a class="gologin-button bd" href="' . get_Go_login_url('bd', false) . '" title="百度登录绑定"></a>';
+                            echo '<a class="gologin-button Gologin_bd" href="' . get_Go_login_url('bd', false) . '" title="百度登录绑定"></a>';
                         }
                         
                         if (is_gologin_bind('gh')) {
                             $gh_jburl = add_query_arg('Go_login_type','ghjb',get_edit_user_link());
-                            echo '<a class="github-b"title="Github解绑" href="'.$gh_jburl.'"></a>';
+                            echo '<a class="Gologin_github-b"title="Github解绑" href="'.$gh_jburl.'"></a>';
                         } else {
-                            echo '<a class="gologin-button github" href="' . get_Go_login_url('sina', false) . '" title="Github登录绑定"></a>';
+                            echo '<a class="gologin-button Gologin_github" href="' . get_Go_login_url('sina', false) . '" title="Github登录绑定"></a>';
                         }
                         
                         if (is_gologin_bind('wx')) {
                             $wx_jburl = add_query_arg('Go_login_type','wxjb',get_edit_user_link());
-                            echo '<a class="wechat-b" title="微信解绑" href="'.$wx_jburl.'"></a>';
+                            echo '<a class="Gologin_wechat-b" title="微信解绑" href="'.$wx_jburl.'"></a>';
                         } else {
-                            echo '<a class="gologin-button wechat" href="' . get_Go_login_url('sina', false) . '" title="微信登录绑定"></a>';
+                            echo '<a class="gologin-button Gologin_wechat" href="' . get_Go_login_url('sina', false) . '" title="微信登录绑定"></a>';
                         }
                     
                     ?>
@@ -397,19 +397,19 @@ function Go_login_connect_form() {
         echo '<div class="Go_login_widget">';
         
         if (!empty(get_option('Go_login_options_qq_appid')) && !empty(get_option('Go_login_options_qq_appkey')))
-            echo'<a class="gologin-button qq" href="' . get_Go_login_url('qq', false) . '" title="QQ登录"></a>';
+            echo'<a class="gologin-button Gologin_qq" href="' . get_Go_login_url('qq', false) . '" title="QQ登录"></a>';
             
         if (!empty(get_option('Go_login_options_sina_appkey')) && !empty(get_option('Go_login_options_sina_appkey')))
-            echo'<a class="gologin-button sina" href="' . get_Go_login_url('sina', false) . '" title="新浪微博登录"></a>';
+            echo'<a class="gologin-button Gologin_sina" href="' . get_Go_login_url('sina', false) . '" title="新浪微博登录"></a>';
             
         if (!empty(get_option('Go_login_options_bd_apikey')) && !empty(get_option('Go_login_options_bd_secretkey')))
-            echo'<a class="gologin-button bd" href="' . get_Go_login_url('bd', false) . '" title="百度登录"></a>';
+            echo'<a class="gologin-button Gologin_bd" href="' . get_Go_login_url('bd', false) . '" title="百度登录"></a>';
             
         if (!empty(get_option('Go_login_options_gh_ClientID')) && !empty(get_option('Go_login_options_gh_ClientSecret')))
-            echo'<a class="gologin-button github" href="' . get_Go_login_url('gh', false) . '" title="Github登录"></a>';
+            echo'<a class="gologin-button Gologin_github" href="' . get_Go_login_url('gh', false) . '" title="Github登录"></a>';
             
         if(get_option('Go_login_options_wechat_switch') == 'on')
-            echo '<a class="gologin-button wechat" href="' . get_Go_login_url('wx', false) . '" title="微信登录"></a></div>';
+            echo '<a class="gologin-button Gologin_wechat" href="' . get_Go_login_url('wx', false) . '" title="微信登录"></a></div>';
     }
 }
 
