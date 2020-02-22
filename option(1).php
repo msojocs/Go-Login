@@ -20,10 +20,13 @@ function display_Go_login_setting() {
     <div class="wpmm-wrapper">
         <div class="content" class="wrapper-cell">
             <form method="post" action="options.php">
-                <?php
-                    settings_fields('GO_login_setting_field');
-                    do_settings_sections('GO_login_setting_page');
-                    submit_button();
+                <?php settings_fields('GO_login_setting_field');
+                ?>
+                <?php do_settings_sections('GO_login_setting_page');
+                    do_settings_sections('GO_login_setting_section');
+                    do_settings_sections('GO_login_setting_field');
+                ?>
+                <?php submit_button();
                 ?>
             </form>
         </div>

@@ -215,7 +215,7 @@ add_action('init', 'Go_login_css');
 /**
  * 判断是否绑定
  * @author 祭夜
- * @version  2.0
+ * @version  2.0.1
  * @param string $type 需要检查的类型，只接受四个固定参数，即:'qq'和'sina'和'bd'和'gh'.
  * @return boole/string 存在返回值，不存在返回false
  */
@@ -273,14 +273,14 @@ function Go_login_profile() {
                             $gh_jburl = add_query_arg('Go_login_type','ghjb',get_edit_user_link());
                             echo '<a class="Gologin_github-b"title="Github解绑" href="'.$gh_jburl.'"></a>';
                         } else {
-                            echo '<a class="gologin-button Gologin_github" href="' . get_Go_login_url('sina', false) . '" title="Github登录绑定"></a>';
+                            echo '<a class="gologin-button Gologin_github" href="' . get_Go_login_url('gh', false) . '" title="Github登录绑定"></a>';
                         }
                         
                         if (is_gologin_bind('wx')) {
                             $wx_jburl = add_query_arg('Go_login_type','wxjb',get_edit_user_link());
                             echo '<a class="Gologin_wechat-b" title="微信解绑" href="'.$wx_jburl.'"></a>';
                         } else {
-                            echo '<a class="gologin-button Gologin_wechat" href="' . get_Go_login_url('sina', false) . '" title="微信登录绑定"></a>';
+                            echo '<a class="gologin-button Gologin_wechat" href="' . get_Go_login_url('wx', false) . '" title="微信登录绑定"></a>';
                         }
                     
                     ?>
