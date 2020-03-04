@@ -68,7 +68,7 @@ class Ghconnect {
 
     //获取信息
     public function getUsrInfo() {
-        $access_token = $_SESSION['access_tokengh'];
+        $access_token = isset($_SESSION['access_tokengh'])?$_SESSION['access_tokengh']:null;
         if (!$access_token) {
             $rdata = $this->getAccessToken();
             $access_token = $rdata->access_token;
@@ -77,10 +77,7 @@ class Ghconnect {
             return false;
         }
         $url = "https://api.github.com/user";
-        // $param['access_token'] = $access_token;
-        // $param = http_build_query($param,'','&');
-        // $url = $url."?".$param;
-        $ret = $this->getUrl($url);
+        $ret = $this->getUrl($url, $access_token);
         $ret = json_decode($ret);
         unset($_SESSION['state']);
         unset($_SESSION['access_tokengh']);
@@ -88,16 +85,13 @@ class Ghconnect {
     }
 
     //CURL GET
-    private function getUrl($url) {
+    private function getUrl($url, $access_token) {
         $ch = curl_init($url);
         $headers[] = "User-Agent: jiyeme";
-        $headers[] = "Authorization: token {$_SESSION['access_tokengh']}";
+        $headers[] = 'Authorization: token ' . $access_token;
         curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
         curl_setopt($ch, CURLOPT_TIMEOUT, 5);
-        if (!empty($options)) {
-            curl_setopt_array($ch, $options);
-        }
         $data = curl_exec($ch);
         curl_close($ch);
         return $data;

@@ -5,6 +5,7 @@ function Go_login_callback() {
     $callbackURL = $_SERVER['REDIRECT_URL'];
     if(Go_login_startwith($callbackURL, '/Gologin/callback') === true)
     {
+        header("Pramga: no-cache");
         switch(substr($callbackURL, strripos($callbackURL,"callback/") + 9))
         {
             case 'qq':
@@ -26,8 +27,8 @@ function Go_login_callback() {
 }
 add_action('init', 'Go_login_callback');
 
-function Go_login_startwith($str,$pattern) {
-    if(strpos($str,$pattern) === 0)
+function Go_login_startwith($str, $pattern) {
+    if(strpos($str, $pattern) === 0)
         return true;
     else
         return false;

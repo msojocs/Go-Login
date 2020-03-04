@@ -447,13 +447,12 @@ function queryPOST($key)
     
 //写日志函数
 function goLoginLogInfo($msg) {
-    $logSwitch = 1;
     // 日志开关：1表示打开，0表示关闭
-    $logFile = __DIR__ . '/log/Go-login.log';
+    $logSwitch = 1;
     // 日志路径
     if ($logSwitch == 0) return;
     date_default_timezone_set('Asia/Shanghai');
-    file_put_contents($logFile, date('[Y-m-d H:i:s]: ') . $msg . PHP_EOL, FILE_APPEND);
+    file_put_contents(__DIR__ . '/log/Go-login.log', date('[Y-m-d H:i:s]: ') . $msg . PHP_EOL, FILE_APPEND);
     return $msg;
 }
 
