@@ -28,7 +28,7 @@ class Ghconnect {
         $this->app_key = get_option('Go_login_options_gh_ClientSecret');
         //Client Secret
         $this->callBackUrl = home_url('Gologin/callback/github');
-        $this->code = $_GET['code'];
+        $this->code = isset($_GET['code'])?$_GET['code']:null;
         //检查用户数据
         if (empty($_SESSION['QC_userData'])) {
             self::$data = array();
@@ -62,25 +62,20 @@ class Ghconnect {
         $param = http_build_query($param,'','&');
         $data = $this->postURL($url,$param);
         $data = json_decode($data);
-        $_SESSION['access_tokengh'] = $data->access_token;
         return $data;
     }
 
     //获取信息
     public function getUsrInfo() {
-        $access_token = isset($_SESSION['access_tokengh'])?$_SESSION['access_tokengh']:null;
-        if (!$access_token) {
-            $rdata = $this->getAccessToken();
-            $access_token = $rdata->access_token;
-        }
+        $rdata = $this->getAccessToken();
+        $access_token = $rdata->access_token;
         if (empty($access_token)) {
-            return false;
+            return 203;
         }
         $url = "https://api.github.com/user";
         $ret = $this->getUrl($url, $access_token);
         $ret = json_decode($ret);
         unset($_SESSION['state']);
-        unset($_SESSION['access_tokengh']);
         return $ret;
     }
 
