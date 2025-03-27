@@ -391,7 +391,7 @@ function Go_login_handle($openid, $userinfo, $type) {
     }
 }
 
-//登录表单
+// 登录表单
 function Go_login_connect_form() {
     if (!is_user_logged_in()) {
         echo '<div class="Go_login_widget">';
@@ -409,7 +409,8 @@ function Go_login_connect_form() {
             echo'<a class="gologin-button Gologin_github" href="' . get_Go_login_url('gh', false) . '" title="Github登录"></a>';
             
         if(get_option('Go_login_options_wechat_switch') == 'on')
-            echo '<a class="gologin-button Gologin_wechat" href="' . get_Go_login_url('wx', false) . '" title="微信登录"></a></div>';
+            echo '<a class="gologin-button Gologin_wechat" href="' . get_Go_login_url('wx', false) . '" title="微信登录"></a>';
+        echo '</div>';
     }
 }
 
