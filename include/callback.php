@@ -2,10 +2,12 @@
 
 //Callback
 function Go_login_callback() {
-    $callbackURL = $_SERVER['REDIRECT_URL'];
+    // nginx+fpm 没有REDIRECT_URL
+    $callbackURL = $_SERVER['REQUEST_URI'];
     if(Go_login_startwith($callbackURL, '/Gologin/callback') === true)
     {
         header("Pramga: no-cache");
+        $callbackURL = explode("?", $callbackURL)[0];
         switch(substr($callbackURL, strripos($callbackURL,"callback/") + 9))
         {
             case 'qq':
